@@ -935,3 +935,27 @@ var result = courses.every2(function(course,index,array){
 // Applicattion programming interface
 
 // Browser: HTML -> DOM -> DOM API
+
+
+var score = [700, 8, 9, 10, 3];
+ 
+console.log(score.sort( (firstEl, secondEl) =>
+    firstEl - secondEl
+    
+ ));
+
+function findLongestWord(str) {
+    var longestWord = str.split(' ').sort(function(a, b) { return b.length - a.length; });
+    return longestWord[0];
+    
+  }
+  function findLongestWord(str) {
+    var ngandendai = str.split(' ').sort((a,b)=>a.length-b.length)
+    return ngandendai;
+  }  
+ 
+var abc =  findLongestWord("The quick brown fox jumped over the lazy dog");
+
+  
+  console.log(abc)
+
