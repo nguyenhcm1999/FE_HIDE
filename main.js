@@ -762,7 +762,7 @@ var courses = new Array(100);
 
 courses.push('Javascript',
 'PHP',
-'Ruby')
+)
 
 courses.forEach2(function(course,index,array){
     console.log(course, index, array);
@@ -810,16 +810,32 @@ console.log(filterCourses);
 
 
 
+// Array.prototype.some2 = function(callback) {
+//     for (var index in this) {
+//         if (this.hasOwnProperty(index)){
+//             if (callback(this[index],index,this)){
+//                 return true;
+//             };
+//         };
+//     }
+//     return false;
+// }
+
+/* hoặc */
+
 Array.prototype.some2 = function(callback) {
+    var output = false;
     for (var index in this) {
         if (this.hasOwnProperty(index)){
             if (callback(this[index],index,this)){
-                return true;
+                output = true;
+                break;
             };
         };
     }
-    return false;
-}
+    return output;
+} 
+
 
 var courses = [
     {
@@ -839,8 +855,83 @@ var courses = [
     },
 ];
 
-var result = courses.some(function(course,index,array) {
+var result = courses.some2(function(course,index,array) {
     return course.isFinish;
 });
 
 console.log(result);
+
+
+//every : true / false
+// chỉ cần 1 thằng sai sẽ sai hết, còn tất cả đều đúng sẽ đúng hết
+
+Array.prototype.every2 = function(callback){
+    var output = true;
+    for(var index in this) {
+        if (this.hasOwnProperty(index)) {
+            var result = callback(this[index], index, this);
+            if (!result) {
+                output = false;
+                break;
+            }
+        }
+    }
+    return output;
+}
+
+
+var courses = [
+    {
+        name:'Javascript',
+        coin: 680,
+        isFinish: true,
+    },
+    {
+        name: 'PHP',
+        coin: 860,
+        isFinish: false,
+    },
+    {
+        name:'Ruby',
+        coin:980,
+        isFinish: false,
+    },
+];
+
+var result = courses.every2(function(course,index,array){
+    return course.coin > 680;
+
+});
+console.log(result);
+
+var result = courses.every2(function(course,index,array){
+    return course.coin > 300;
+});
+
+
+// HTML DOM
+
+// 1. Element : ID, class, tag,
+// ID trả trực tiếp đối tượng qua ID
+// class trả về 1 mảng gồm nhiều element bên trong select qua class
+// tag trả về 1 HTML collection gồm nhiều element bên trong khác ở chỗ
+// tag trả qua tên thẻ
+
+// CSS selector, HTML collection
+// CSS selector querySelector lấy thẳng 1 đối tượng matching với class 
+// được truyền vào qua cái CSS selector được truyền vào
+// querySelectorAll select tất cả những đối tượng element có class
+// matching với class bạn truyền vào
+
+// HTML collection ví dụ thẻ a, thẻ form
+
+// 2. Attribute
+// 3. Text
+
+// ________________
+
+// Javascript: Browser | Server (NodeJS)
+
+// Applicattion programming interface
+
+// Browser: HTML -> DOM -> DOM API
