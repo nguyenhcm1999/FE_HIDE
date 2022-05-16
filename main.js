@@ -927,7 +927,18 @@ var result = courses.every2(function(course,index,array){
 
 // 2. Attribute
 // 3. Text
+var boxNode = document.querySelector('.box-1');
+// Công việc 1: Sử dụng tới `boxNode`
+console.log(boxNode);
+// Công việc 2: Sử dụng tới các li elements
+// là con của `.box-1`
+console.log(boxNode.getElementsByTagName('li'));
+console.log(boxNode.querySelector('p'));
 
+var listItemNodes = 
+document.querySelectorAll('.box-1 li');
+console.log(listItemNodes);
+ 
 // ________________
 
 // Javascript: Browser | Server (NodeJS)
@@ -940,7 +951,7 @@ var result = courses.every2(function(course,index,array){
 var score = [700, 8, 9, 10, 3];
  
 console.log(score.sort( (firstEl, secondEl) =>
-    firstEl - secondEl
+    secondEl -firstEl 
     
  ));
 
@@ -959,3 +970,69 @@ var abc =  findLongestWord("The quick brown fox jumped over the lazy dog");
   
   console.log(abc)
 
+
+
+// 1. getElementById
+// 2. getElementsByCLassName
+// 3. getElementsByTagName
+// 4. querySelector
+// 5. querySelectorALL
+// 6. HTML collection
+// 7. document.write
+
+
+
+
+
+var headings = document.getElementsByTagName('h1');
+console.log(headings[0]);
+
+
+var h1Element = document.getElementsByTagName('h1')[0]
+console.log(h1Element)
+
+var headings = document.getElementsByClassName('heading');
+console.log(headings);
+
+var headings = document.querySelectorAll('.heading');
+console.log(headings[0]);
+
+for (var i =0; i < headings.length; i++){
+    console.log(headings[i])
+}
+
+console.log(document.forms[1]);
+
+document.write('hello');
+
+
+//DOM attributes
+
+var headingElement = 
+ document.querySelector('h1');
+
+// thêm attribute
+headingElement.title = 'Heading';   
+headingElement.className = 'Heading';
+headingElement.setAttribute('d','heading-test');
+headingElement.setAttribute('style','color: red');
+// headingElement.style = 'color:red';
+console.log(headingElement.getAttribute('style'));
+console.log(headingElement.getAttribute('d'));
+console.log(headingElement.title);
+
+// có thể những thuộc tính không cần phải hợp lệ với các element đó
+
+// innerText, textContent
+
+//geter  
+
+//sêtr
+
+var headingElement =
+document.querySelector('h1');
+console.log(headingElement.innerText)
+//hoặc
+console.log(headingElement.textContent)
+
+headingElement.innerText = 'New heading';
