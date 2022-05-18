@@ -984,11 +984,11 @@ var abc =  findLongestWord("The quick brown fox jumped over the lazy dog");
 
 
 
-var headings = document.getElementsByTagName('h1');
+var headings = document.getElementsByTagName('h2');
 console.log(headings[0]);
 
 
-var h1Element = document.getElementsByTagName('h1')[0]
+var h1Element = document.getElementsByTagName('h2')[0]
 console.log(h1Element)
 
 var headings = document.getElementsByClassName('heading');
@@ -1027,12 +1027,78 @@ console.log(headingElement.title);
 
 //geter  
 
-//sêtr
+//seter
 
 var headingElement =
 document.querySelector('h1');
-console.log(headingElement.innerText)
-//hoặc
-console.log(headingElement.textContent)
 
-headingElement.innerText = 'New heading';
+//innerText là những gì mình nhìn thấy
+
+console.log(headingElement.innerText)
+// ẩn đi thuộc tính display:none
+//hoặc
+
+// textContent nhìn thấy tất cả nội dung, css, js
+
+console.log(headingElement.textContent)
+// textcontent không bị ảnh hưởng bởi thuộc tính display:none
+
+headingElement.textContent = `
+
+New Heading
+
+`;
+
+//elementnode là các thẻ, textnode là nội dung nằm trong các thẻ
+
+
+// innerHTML, outerHTML
+
+
+var boxElement = document.querySelector('.box');
+
+
+// innerHTML có thể thêm các node trong một element khác
+
+
+
+boxElement.innerHTML = '<h1>New Heading</h1>';
+
+
+boxElement.innerHTML = '<h1 title="Heading">New Heading</h1>';
+
+
+
+// console.log(boxElement.outerHTML)
+
+
+console.log(document.querySelector('h1').innerText);
+
+
+
+// thẻ span ghi đè lên lúc h1 đang là con của box
+
+// boxElement.outerHTML = '<span>Test</span>';
+
+
+console.log(boxElement.innerHTML); 
+
+
+var boxElement = document.querySelector('.box');
+
+console.log([boxElement]);
+
+var boxElement1 = document.querySelector('.box-3');
+
+// boxElement1.style.width = '100px';
+// boxElement1.style.height = '200px';
+// boxElement1.style.backgroundColor = 'red';
+
+Object.assign(boxElement1.style, {
+    width: '200px',
+    height: '100px',
+    backgroundColor: 'green',
+});
+
+// lấy ra giá trị thuộc tính css không phải lấy ra chiều ngang đối tượng
+console.log(boxElement1.style.width);
