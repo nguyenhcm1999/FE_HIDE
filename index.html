@@ -5,6 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi world  d111aa1</title>
+    <style>
+        .red {
+            color: red;
+        }
+        ul {
+            display: none;
+        }
+        input:focus ~ ul {
+            display:block;
+        }
+    </style>
+    
 </head>
 <body>
     <h1 >
@@ -53,6 +65,51 @@
     <form action="" id="form-2"></form>
 
     <div class="box-3"></div>
+    <div class="box-4 box-5">
+        <h4>CLASS LIST</h4>
+    </div>
+    <h3 onclick="console.log(this)">
+        <span onclick="console.log(this)">DOM events</span>
+    </h3>
+    <h3 onclick="console.log(Math.random())">DOM events</h3>
+    <h3 onclick="console.log(this.innerText)">DOM events</h3>
+    <!-- <h3 onmouseover="console.log(Math.random())">DOM events</h3> -->
+    <h5>
+        <span>DOM events test 5 </span>
+    </h5>
+    <h5>
+        <span>DOM events test 6</span>
+    </h5>
+    <input type="text">
+    <input type="checkbox">
+
+    <select>
+        <option value="1">Javascript</option>
+        <option value="2">PHP</option>
+        <option value="3">Dart</option>
+    </select>
+    <br>
+    <a name="Học lập trình" href="https://fullstack.edu.vn">
+        Học lập trình
+    </a>
+    <br>
+    <a name="Tìm kiếm" href="https://google.com.vn">
+        Tìm kiếm
+    </a>
+    <br>
+    <input placeholder="Tìm kiếm"   />
+    <ul class="ABC">
+        <li>JS</li>
+        <li>PHP</li>
+        <li>Golang</li>
+    </ul><br><br>
+    
+    <div >
+        DIV
+        <button >Click me!</button>
+    </div>
+    <br>
+    <button id="btn">Click me 2!</button>
     <script src="./main.js"></script>
 </body>
 

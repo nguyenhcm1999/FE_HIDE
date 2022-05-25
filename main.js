@@ -933,6 +933,7 @@ console.log(boxNode);
 // Công việc 2: Sử dụng tới các li elements
 // là con của `.box-1`
 console.log(boxNode.getElementsByTagName('li'));
+
 console.log(boxNode.querySelector('p'));
 
 var listItemNodes = 
@@ -949,7 +950,7 @@ console.log(listItemNodes);
 
 
 var score = [700, 8, 9, 10, 3];
- 
+//  lớn đến nhỏ
 console.log(score.sort( (firstEl, secondEl) =>
     secondEl -firstEl 
     
@@ -1003,7 +1004,8 @@ for (var i =0; i < headings.length; i++){
 
 console.log(document.forms[1]);
 
-document.write('hello');
+
+
 
 
 //DOM attributes
@@ -1102,3 +1104,354 @@ Object.assign(boxElement1.style, {
 
 // lấy ra giá trị thuộc tính css không phải lấy ra chiều ngang đối tượng
 console.log(boxElement1.style.width);
+
+//lưu ý cách trên chỉ là css inline không phải internal hay external
+//chỉ dùng thêm để css
+
+
+
+// ClassList property
+// add
+// contains 
+// remove
+// toggle có thì thêm, không có thì gỡ bỏ
+
+//truy xuất tới thuộc tính style của element bằng cách
+
+
+var boxElement4 = document.querySelector('.box-4');
+
+console.log(boxElement4.classList[1]);
+
+
+// trả về chuỗi nằm trong class
+
+console.log(boxElement4.classList.value);
+
+//thêm nhiều class nhớ , không được cách
+boxElement4.classList.add('red', 'blue', 'green');
+
+// kiểm tra 1 element có class nào hay không, ví dụ menu open close
+console.log(boxElement4.classList.contains('red'));
+
+
+// console.log(boxElement4.classList.remove('red'));
+
+// setTimeout(() =>{
+//     boxElement4.classList.remove('red');
+// },3000);
+
+
+// setTimeout(() =>{
+//     boxElement4.classList.toggle('red');
+// },3000);
+
+setInterval(() =>{
+    boxElement4.classList.toggle('red');
+},1000);
+
+
+//DOM events
+//1. Attribute events
+//2. Assign event using the element node
+
+var h5Element = document.querySelector('h5');
+// nếu có 2 tag giống nhau nó sẽ lấy thằng đầu tiên trong DOM thôi
+
+
+h5Element.onclick = function() {
+    console.log(Math.random());
+};
+
+h5Element.onclick = function(e) {
+    console.log(e.target);
+};
+
+// nếu muốn lấy hết tất cả nằm trong tag giống nhau thì
+
+var h6Element = document.querySelectorAll('h5');
+
+for (var i = 0; i < h6Element.length; ++i) {
+    h6Element[i].onclick = function(e) {
+        console.log(e.target);
+    }
+}
+
+
+// 1. Input / select
+// 2. Key up / down
+
+var inputValue;
+
+var inputElement = document.querySelector('input[type="text"]');
+console.log(inputElement);
+
+
+// onchange khi blur ra ngoài thì sẽ trả giá trị
+inputElement.onchange = function(e) {
+    console.log(e.target.value);
+}
+
+
+//còn muốn gõ tới đâu thì lấy được tới đó 
+
+inputElement.oninput = function(e) {
+    inputValue = e.target.value;
+    // console.log(e.target.value);
+}
+
+var inputElement1 = document.querySelector('input[type="checkbox"]');
+console.log(inputElement1);
+
+inputElement1.onchange = function(e) {
+    console.log(e.target.checked);
+}
+
+var inputElement2 = document.querySelector('select');
+
+inputElement2.onchange = function(e) {
+    console.log(e.target.value);
+}
+
+
+// var inputElement = document.querySelector('input[type="text"]');
+// keyup nhấc phím lên, keydown bấm phím xuống
+// inputElement.onkeyup = function (e) {
+//     console.log(e.which);
+
+//     switch(e.which) {
+//         case 27 :
+//             console.log('Exit');
+//             break;
+//     }
+// }
+
+
+document.onkeypress = function(e1) {
+    console.log(e1.which);
+    switch(e1.which) {
+        case 27:
+            console.log('Exit');
+            break;
+        case 13:
+            console.log('SEND CHAT');
+            break;
+    }
+} 
+
+// 1. preventDefault sử dụng nó để loại bỏ hành vi mặc định
+//  của trình duyệt  trên thẻ HTMl
+
+// 2. stopPropagation loại bỏ sự kiện nổi bọt
+
+
+
+var aElements4 = document.links;
+
+
+
+for(var i = 0; i < aElements4.length; ++i) {
+    aElements4[i].onclick = function(e) {
+        if (!e.target.href.startsWith('https://fullstack.edu.vn')) {
+            e.preventDefault();
+        }
+    }
+}
+
+// var ulElement = document.getElementsByTagName('ul')[2];
+
+// console.log(ulElement);
+
+// ulElement.onmousedown = function(e) {
+//     e.preventDefault();
+// }
+
+// ulElement.onclick =
+// function(e) {
+//     console.log(e.target);
+// };
+
+
+var ulElement1 = document.querySelectorAll('ul')[2];
+console.log(ulElement1);
+
+// ngăn chặn hành động khi click con chuột xuống
+ulElement1.onmousedown = function(e) {
+    e.preventDefault();
+}
+
+ulElement1.onclick =
+function(e) {
+    console.log(e.target);
+};
+
+document.querySelector('div').onclick = 
+function() {
+    console.log('DIV');
+}
+document.querySelector('button').onclick = 
+function(e) {
+    e.stopPropagation();
+    console.log('Click me!');
+}
+
+var nameVar = 'john';
+var nameVar = 'Smith';
+console.log("var = ", nameVar);
+
+let nameLet = 'john';
+    nameLet = 'Smith';
+console.log("let = ", nameLet);
+
+// Scope -> Tầm vực
+
+// tầm vực của từ khóa var -> Trong function
+// tầm vực của từ khóa let -> Trong block -> {}
+
+var age = 30;
+if (age > 20) {
+    var message = nameVar + ' ' + 'là một người lớn hơn 20 tuổi'; 
+    console.log("trong tầm vực block", message);
+}
+    console.log("ngoài tầm vực block", message);
+// nếu dùng let thì console.log("ngoài tầm vực block", message); sẽ báo lỗi
+
+const pi = 3.14;
+    // pi = 2;
+// Hằng số -> không thay đổi trong quá trình lập trình
+console.log("pi =", pi);
+
+//Thao tác cons với object 
+const obj = {
+    firstName: 'John'
+}
+// Const của obj -> bản chất của nó là không thay đổi về mặt địa chỉ của 
+// object lưu trong bộ nhớ
+var newObj = {};
+
+obj.firstName = 'Smith Edit'; //Khong báo lỗi
+console.log(obj.firstName);
+
+// obj = newObj; sẽ báo lỗi
+
+
+
+// 1.Event listener
+// 2. JSON
+// 3. Fetch
+// 4. DOM location
+// 5. Local storage
+// 6. Session storage
+// 7. Coding convention
+// 8. Best Practices
+// 9. Mistakes
+// 10. Performance
+
+
+// 1. Xử lý nhiều việc khi 1 event xảy ra
+// 2. Lắng nghe / Hủy bỏ lắng nghe
+
+var btn = document.getElementById('btn'); 
+
+console.log(btn);
+
+// ví dụ sau 3 giây mới hoạt động thì
+setTimeout( function() {
+    btn.onclick = function(){
+        // viec 1
+        console.log('Viec 1');
+        // viec 2
+        console.log('Viec 2');
+        // viec 3
+        alert('Viec 3');
+    }
+},0); //0 thành 3000
+
+// ví dụ 3 giây đầu lắng nghe, sau 3 giây không lắng nghe nữa thì
+
+// là 1 key có object nên có thể ghi đè, thay thế value của onlick bằng function rỗng
+// hủy bỏ sự kiện lắng nghe trong dom event bằng cách gán lại bằng 1 function rỗng
+setTimeout(function(){
+    btn.onclick = function () {
+
+    }
+},3000)
+
+// cách lắng nghe sự kiện khi sử dụng event listener
+// đồng loạt được gọi và gọi theo thứ tự
+
+var btn = document.getElementById('btn'); 
+
+// đối số thứ 1 nhận eventname loại bỏ chữ on, onclick bỏ on đi
+btn.addEventListener('click',function(e){
+    console.log('event listener 1'); 
+});
+
+// btn.addEventListener('click',function(e){
+//     console.log('Event 2'); 
+// });
+
+// btn.addEventListener('click',function(e){
+//     console.log('Event 3'); 
+// });
+
+function viec1() {
+    console.log('Viec el 1');
+}
+
+function viec2() {
+    console.log('Viec el 2');
+}
+
+btn.addEventListener('click', viec1);
+btn.addEventListener('click', viec2);
+
+// nếu muốn hủy bỏ lắng nghe thì phải tách function ở đối số thứ 2 ra thành 1 function
+// riêng thì mới có thể đồng loạt sử dụng cho việc lắng nghe hoặc hủy bỏ lắng nghe
+// cụ thể trên 1 listener nào đó mà dom khó có thể làm được
+setTimeout(function(){
+    btn.removeEventListener('click',viec1)
+},3000);
+
+//tổng kết sử dụng dom event trong case đơn giản, muốn lắng nghe sự kiện nào đó
+// không có nhu cầu gỡ bỏ, còn event listener có thể hủy bỏ lắng nghe sự kiện đó
+// trong một trường hợp cụ thể nào đó, khi có nhiều listener có thể hủy bất cứ listener nào
+
+
+// 1. Json là một định dạng dữ liệu (chuỗi)
+// 2. JavaScript Object Notation
+// 3. JSON: Number, Boolean, Null, Array, Object
+
+
+// Mã hóa / Giải mã
+// Encode / decode
+// Stringify: từ javascript types-> JSON
+// Parse: Từ JSON -> Javascript types
+
+var Json = '["Javascript","PHP"]';  // cặp ngoặc '' ngoài cùng là chuỗi trong js
+// các key thể hiện kiểu dữ liệu dạng chuỗi dùng cặp nháy "", ngăn cách phần tử ,
+
+
+var a = '1';
+console.log(JSON.parse(a)); //JSON là kiểu number , còn type of null là 1 object
+
+// nếu muốn thể hiện dạng chuỗi ở json thì thêm dấu ""
+var b ='"abc"';
+console.log(typeof JSON.parse(b)); // là string
+
+var json = '{"name":"Son Dang","age":18}';
+var object = JSON.parse(json);
+console.log(object);
+
+// chuyển từ javscript sang json 
+// nếu muốn thêm 1 dấu nháy kép vào trong ' ' thì nó sẽ thêm \
+console.log(JSON.stringify([
+    'Javas"cript',
+    'PHP'
+]));
+
+// object thì nó sẽ dùng nháy kép cho cả key và cả value
+console.log(JSON.stringify({
+    name:'Son Dang',
+    age: 16
+}));
