@@ -465,13 +465,14 @@ var courses = [
 ];
 //duyệt ra từng phần tử của mảng
 
-courses.forEach(function(index, course) {
+courses.forEach(function(course, index) {
     console.log(index, course);
 })
 
 //giải các bài toán kiểm tra các phần tử có thỏa mãn 1 điều kiện nào đó
 var isFree = courses.every(function(course,index) {
-    console.log(index);
+    console.log(index); // trả về số 0,1 rồi dừng có nghĩa là i = 1, điều kiện
+    // không thỏa mãn với course.coin === 0
     return course.coin === 0;
 });
 
@@ -1443,6 +1444,9 @@ var json = '{"name":"Son Dang","age":18}';
 var object = JSON.parse(json);
 console.log(object);
 
+console.log(typeof JSON.parse(b) === 'string' && b !== null )
+
+
 // chuyển từ javscript sang json 
 // nếu muốn thêm 1 dấu nháy kép vào trong ' ' thì nó sẽ thêm \
 console.log(JSON.stringify([
@@ -1453,5 +1457,38 @@ console.log(JSON.stringify([
 // object thì nó sẽ dùng nháy kép cho cả key và cả value
 console.log(JSON.stringify({
     name:'Son Dang',
-    age: 16
+    age: 16,
+    test: function() {
+
+    }
 }));
+
+const daychu = [
+    {ho:"abc", ten:"def"},
+    {ho:"abc1", ten:"def1"},
+    {ho:"abc2", ten:"def2"},
+];
+var daychunoidai = daychu.map(q =>[q.ho,q.ten].join(" "))
+console.log(daychunoidai);
+
+let logHi = (str = 123) => {
+    console.log(str);
+    
+}
+
+logHi(undefined);
+logHi(null);
+
+
+// promise
+// - sync là đồng bộ
+// - Async là bất đồng bộ : setTimeout, setInterval, fetch, xmlhttprequest,
+// file reading, request animation frame
+
+// callback
+setTimeout(function(){
+    console.log(1);
+},1000);
+
+console.log(2);
+
