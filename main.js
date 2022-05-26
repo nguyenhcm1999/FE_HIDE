@@ -1400,19 +1400,17 @@ function viec1() {
     console.log('Viec el 1');
 }
 
-function viec2() {
-    console.log('Viec el 2');
-}
 
-btn.addEventListener('click', viec1);
-btn.addEventListener('click', viec2);
+btn.addEventListener("click", viec1);
+btn.addEventListener('click', function (){console.log('viec el2')});
 
 // nếu muốn hủy bỏ lắng nghe thì phải tách function ở đối số thứ 2 ra thành 1 function
 // riêng thì mới có thể đồng loạt sử dụng cho việc lắng nghe hoặc hủy bỏ lắng nghe
 // cụ thể trên 1 listener nào đó mà dom khó có thể làm được
-setTimeout(function(){
-    btn.removeEventListener('click',viec1)
-},3000);
+
+// setTimeout(function(){
+//     btn.removeEventListener('click',viec1)
+// },3000);
 
 //tổng kết sử dụng dom event trong case đơn giản, muốn lắng nghe sự kiện nào đó
 // không có nhu cầu gỡ bỏ, còn event listener có thể hủy bỏ lắng nghe sự kiện đó
@@ -1492,3 +1490,161 @@ setTimeout(function(){
 
 console.log(2);
 
+// Object chứa hàm callback
+var domainInfo = {
+    name : 'freetuts.net', 
+    quan : 19,
+    setName : function(name){
+       this.name = name ;
+          
+    },
+    setQuan : function(quan){
+        this.quan = quan;
+    },
+};
+
+// Hàm có tham số callback
+function test(callback, callback1, callbackObject){
+    
+   var  name="Nguyễn Văn An";
+   var  quan="222";
+    callback.apply(callbackObject, [name]);
+    callback1.apply(callbackObject,[quan]);
+
+}
+ 
+// Gọi đến hàm và truyền hàm callback vào
+test(domainInfo.setName,domainInfo.setQuan,domainInfo);
+
+// Kết quả: Nguyễn Văn Cường
+console.log(domainInfo.name);
+console.log(domainInfo.quan);
+
+
+
+
+const lapTop = {
+    name: "Macbook",
+    isOn: false,
+    turnOn() {
+        this.isOn = true;
+        return `${this.name} đang mở`;
+    },
+    turnOff() {
+        this.isOn = false;
+        return `${this.name} đang tắt`;
+    }
+};
+
+const mobile = {
+    name: "iPhone",
+    isOn: false
+};
+ 
+
+console.log(lapTop.turnOn.apply(mobile)); // iphone đang mở
+
+
+const person = {
+    fullName: function(city, country) {
+      return `thành phố ${city} quê quán ${country} tên ${this.firstName} họ ${this.lastName} `;
+    }
+  }
+  
+  const person1 = {
+    firstName:"John",
+    lastName: "Doe"
+  }
+  
+  console.log(person.fullName.apply(person1, ["Oslo", "Norway"]));
+
+ 
+  function myFunction1 (param) {
+      param('js');
+  };
+
+  function myCallback1 (value) {
+      console.log('value: ', value);
+  }
+
+  myFunction1(myCallback1)
+ 
+
+
+
+  function alertCallback() {
+    console.log('i am calback')
+}
+function logAndAlert(a) {
+    
+    a();
+}
+logAndAlert(alertCallback);
+
+function doSomething() {
+    console.log('vào');
+}
+function something(doCallback) {
+    doCallback();
+}
+something(doSomething);
+
+
+
+function sumAll() {
+    
+    var len = arguments.length;
+    var sum = 0;
+    for(i=0; i < len; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+    
+}
+sumAll(3,4,5,6,7)
+
+document.getElementById("demo").innerHTML =
+"Tổng = " + sumAll(1, 123, 200, 44, -88);
+
+const sinhVien = [
+    { ho: "Đặng", ten: "Ngọc Anh" },
+    { ho: "Vi", ten: "Tiểu Bảo" },
+    { ho: "Hàn", ten: "Lập" }
+];
+
+var tenDayDu = sinhVien.map(function(sv) {
+   return hovaten = [sv.ho,sv.ten].join(" ");
+}) 
+
+console.log(tenDayDu);
+
+// ----------------------------------------
+// function showData(name, amt) {  
+//     alert(' Hello ' + name + '\n Your entered amount is ' + amt);  
+//     }  
+      
+//     function getData(callback) {  
+//     var name = prompt(" Welcome to the javaTpoint.com \n What is your name?");  
+//     var amt = prompt(" Enter some amount...");  
+//     callback(name, amt);  
+//     }  
+      
+//     getData(showData);  
+
+//-------------------
+var car = {
+    getFullName: function(weight, color) {
+        return this.brand + " " + this.name + ", " + weight + " kg, " + color;
+    }
+};
+var car1 = {
+    brand:"Toyota",
+    name: "Prius 2018"
+};
+var car2 = {
+    brand:"Ford",
+    name: "Everest 2018"
+};
+
+console.log(car.getFullName.apply(car1, [850,"white"]));
+console.log(car.getFullName.apply(car2, [950,"red"]));
