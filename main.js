@@ -1503,15 +1503,23 @@ var domainInfo = {
     },
 };
 
+console.log(domainInfo);
+
 // Hàm có tham số callback
 function test(callback, callback1, callbackObject){
     
-   var  name="Nguyễn Văn An";
-   var  quan="222";
+    var name = "Nguyễn Văn An";
+    var quan = "222";
     callback.apply(callbackObject, [name]);
     callback1.apply(callbackObject,[quan]);
-
+    
+    console.log(callbackObject);
+    console.log(callback);
+    console.log(callback1);
+    
 }
+
+
  
 // Gọi đến hàm và truyền hàm callback vào
 test(domainInfo.setName,domainInfo.setQuan,domainInfo);
@@ -1519,7 +1527,19 @@ test(domainInfo.setName,domainInfo.setQuan,domainInfo);
 // Kết quả: Nguyễn Văn Cường
 console.log(domainInfo.name);
 console.log(domainInfo.quan);
+console.log(domainInfo);
 
+
+
+
+var callback = function(name){
+    return `${this.name1} có ${name}`;
+}
+
+var callbackObject = {name1: "văn tòn"}
+
+
+console.log(callback.apply(callbackObject,['khỏe khum']))
 
 
 
@@ -1648,3 +1668,5 @@ var car2 = {
 
 console.log(car.getFullName.apply(car1, [850,"white"]));
 console.log(car.getFullName.apply(car2, [950,"red"]));
+
+
