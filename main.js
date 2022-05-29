@@ -1149,7 +1149,7 @@ console.log(boxElement4.classList.contains('red'));
 
 setInterval(() =>{
     boxElement4.classList.toggle('red');
-},1000);
+},2000);
 
 
 //DOM events
@@ -1241,7 +1241,8 @@ document.onkeypress = function(e1) {
 } 
 
 // 1. preventDefault sử dụng nó để loại bỏ hành vi mặc định
-//  của trình duyệt  trên thẻ HTMl
+//  của trình duyệt  trên thẻ HTML, nghĩa là nếu đáng lẽ ra trang web của mình
+// phải xảy ra ntn, nhưng mình có thể ngăn chặn nó
 
 // 2. stopPropagation loại bỏ sự kiện nổi bọt
 
@@ -1286,10 +1287,12 @@ function(e) {
     console.log(e.target);
 };
 
-document.querySelector('div').onclick = 
+document.querySelectorAll('div')[5].onclick = 
 function() {
     console.log('DIV');
 }
+
+
 document.querySelector('button').onclick = 
 function(e) {
     e.stopPropagation();
@@ -1478,17 +1481,6 @@ logHi(undefined);
 logHi(null);
 
 
-// promise
-// - sync là đồng bộ
-// - Async là bất đồng bộ : setTimeout, setInterval, fetch, xmlhttprequest,
-// file reading, request animation frame
-
-// callback
-setTimeout(function(){
-    console.log(1);
-},1000);
-
-console.log(2);
 
 // Object chứa hàm callback
 var domainInfo = {
@@ -1516,7 +1508,8 @@ function test(callback, callback1, callbackObject){
     console.log(callbackObject);
     console.log(callback);
     console.log(callback1);
-    
+    console.log(domainInfo);
+
 }
 
 
@@ -1528,18 +1521,6 @@ test(domainInfo.setName,domainInfo.setQuan,domainInfo);
 console.log(domainInfo.name);
 console.log(domainInfo.quan);
 console.log(domainInfo);
-
-
-
-
-var callback = function(name){
-    return `${this.name1} có ${name}`;
-}
-
-var callbackObject = {name1: "văn tòn"}
-
-
-console.log(callback.apply(callbackObject,['khỏe khum']))
 
 
 
@@ -1589,8 +1570,6 @@ const person = {
 
   myFunction1(myCallback1)
  
-
-
 
   function alertCallback() {
     console.log('i am calback')
@@ -1670,3 +1649,23 @@ console.log(car.getFullName.apply(car1, [850,"white"]));
 console.log(car.getFullName.apply(car2, [950,"red"]));
 
 
+
+// promise
+// - sync là đồng bộ
+// - Async là bất đồng bộ : setTimeout, setInterval, fetch, xmlhttprequest,
+// file reading, request animation frame
+
+// callback
+setTimeout(function(){
+    console.log(1);
+},1000);
+
+console.log(2);
+
+var domain = ["freetuts.net", 'qa.freetuts.net', 'demo.freetuts.net'];
+ 
+domain.map(function(val, key){
+    domain[key] = val.toUpperCase();   
+});
+ 
+console.log(domain);
