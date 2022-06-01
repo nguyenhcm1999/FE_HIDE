@@ -713,6 +713,7 @@ Array.prototype.map2= function(callback) {
  ];
 
 
+
  // đây cũng là 1 dạng callback
 
  //1 function vô danh
@@ -1648,7 +1649,24 @@ var car2 = {
 console.log(car.getFullName.apply(car1, [850,"white"]));
 console.log(car.getFullName.apply(car2, [950,"red"]));
 
-
+Array.prototype.myEvery = function (callback) {
+    for (var i = 0; i < this.length; i++) {
+      if (!callback(this[i], i, this)) {
+        return false;
+      }
+    }
+    return true;
+  };
+  var numbers = [2, 4, 6];
+  var evens = numbers.myEvery(function (number) {
+    return number % 2 === 0;
+  });
+  console.log('every fake', evens);
+  console.log('every method real',
+    numbers.every(function (number) {
+      return number % 2 === 0;
+    })
+  );
 
 // promise
 // - sync là đồng bộ
@@ -1656,11 +1674,11 @@ console.log(car.getFullName.apply(car2, [950,"red"]));
 // file reading, request animation frame
 
 // callback
-setTimeout(function(){
-    console.log(1);
-},1000);
+// setTimeout(function(){
+//     console.log(1);
+// },0);
 
-console.log(2);
+// console.log(2);
 
 var domain = ["freetuts.net", 'qa.freetuts.net', 'demo.freetuts.net'];
  
@@ -1669,3 +1687,108 @@ domain.map(function(val, key){
 });
  
 console.log(domain);
+
+
+
+
+
+// Callback hell
+// Pyramid of doom
+
+// setTimeout(function(){
+//     console.log(1); // viec 1
+//     setTimeout(function(){
+//         console.log(2); // viec 2
+//         setTimeout(function(){
+//             console.log(3); // viec 3
+//             setTimeout(function(){
+//                 console.log(4); // viec 4
+//             },1000);
+//         },0000);
+//     },0000);
+// },0000);
+
+// 1. new Promise
+// 2. Executor
+
+
+// đây là 1 object contructor 
+// resolve hiểu đơn giản là thành công, reject là thất bại
+// promise sinh ra để giải quyết 1 vấn đề gì đó trong quá trình lập trình bất đồng bộ
+// trước khi dùng promise thì sẽ có callback, nhưng sẽ xảy ra callback hell vậy nên
+// promise sinh ra để khắc phục tình trạng callback hell không bị xâu vào khi code
+
+// 1. Pendding 
+// 2. Fulfilled
+// 3. Rejected
+
+
+// 1. promise sau đang ở trạng thái pending đang chờ thành công hoặc thất bại, và
+// nó đang bị rò rỉ bộ nhớ vì đang chạy mãi mà không resolve() hoặc reject()
+// 2. Fulfilled là trạng thái thành công
+// 3. Rejected là trạng thái thất bại
+var promise = new Promise (
+    // Excutor
+    function(resolve, reject){
+        // logic
+        // thành công gọi : resolve()
+        // thất bại gọi : reject()
+        // Fake call API
+        resolve();
+        // khi reject sẽ reject mã lỗi hoặc thông báo lỗi
+        // reject('Co loi!');
+    }
+); 
+
+promise 
+    // .then(function(courses ){
+    //     console.log(courses);        
+    // })
+
+    .then(function() {
+        return new Promise(function(resolve){
+            setTimeout(function(){resolve([1,2,3]);}
+            ,5000);
+        });
+    })
+
+    .then(function(data){
+        console.log(data)
+    })
+
+    // nếu như không bắt lỗi thì sẽ hiển thị Uncaught (in promise ) Co loi
+    .catch(function(error){
+        console.log(error);    
+    })
+
+    .finally(function(){
+        console.log('Done!');
+    })
+
+
+function sleep(ms){
+    return new Promise((resolve) => {
+        setTimeout(resolve,ms)
+    });
+}
+
+sleep(1000)
+    .then(function(){
+        console.log(1);
+        return sleep(1000);
+    })
+
+    .then(function(){
+        console.log(2);
+        return sleep(1000);
+    })
+
+    .then(function(){
+        console.log(3);
+        return sleep(1000);
+    })
+
+    .then(function(){
+        console.log(4);
+        return sleep(1000);
+    })
