@@ -1734,6 +1734,14 @@ var promise = new Promise (
         // thành công gọi : resolve()
         // thất bại gọi : reject()
         // Fake call API
+
+        // resolve([
+        //     {
+        //         id: 1,
+        //         name: 'JS'
+        //     }
+        // ]);
+
         resolve();
         // khi reject sẽ reject mã lỗi hoặc thông báo lỗi
         // reject('Co loi!');
@@ -1773,7 +1781,7 @@ function sleep(ms){
 }
 
 sleep(1000)
-    .then(function(){
+    .then(()=>{
         console.log(1);
         return sleep(1000);
     })
@@ -1791,4 +1799,67 @@ sleep(1000)
     .then(function(){
         console.log(4);
         return sleep(1000);
+    });
+
+
+
+
+function delay(ms){
+    return promise = new Promise(function(resolve){
+        setTimeout(resolve,ms)
     })
+}
+delay(3000)
+    .then(function(){
+        console.log('run after 3s');
+        return delay(3000)});
+
+
+function notHell(value) {
+    return new Promise(function (resolve) {
+        resolve(value);
+    });
+}
+    
+    
+notHell(1)
+    .then(function (value) {
+        return value + 1;
+    })
+    .then(function (value) {
+        return value + 1;
+    })
+    .then(function (value) {
+        return value + 1;
+    })
+    .then(function (value) {
+        console.log(value + 1);
+        });
+    
+
+        // function sleep(ms){
+        //     return new Promise((resolve) => {
+        //         setTimeout(resolve,ms)
+        //     });
+        // }
+        
+        // sleep(7000)
+        //     .then(function(){
+        //         console.log(1);
+                
+        //     })
+        
+        //     .then(function(){
+        //         console.log(2);
+                
+        //     })
+        
+        //     .then(function(){
+        //         console.log(3);
+                
+        //     })
+        
+        //     .then(function(){
+        //         console.log(4);
+                
+        //     });
