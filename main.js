@@ -499,6 +499,35 @@ console.log(listCourses);
 
 // var courseHandler = function(){}
 
+var courses = [
+    {
+        id:1,
+        name:'JS',
+        coin:0
+    },
+    {
+        id:2,
+        name:'HTML, CSS',
+        coin:200
+    },
+    {id:3,
+        name:'Ruby',
+        coin:0
+    },
+    {id:4,
+        name:'PHP',
+        coin:400
+    },
+    {id:5,
+        name:'Ruby',
+        coin:0
+    },
+    {id:6,
+        name:'Ruby',
+        coin:0
+    },
+];
+
 function courseHandler(course, index, originArray){
     // console.log(course);
     return{
@@ -587,6 +616,14 @@ var numbers = [ 0, 200, 0, 400, 0, 0];
 
 var totalCoin = numbers.reduce(function(total,number){
     return total + number;
+},0);
+
+console.log(totalCoin);
+
+var numbers = [ {id:0}, {id:200}, {id: 0}, {id: 400}, {id: 0}, {id: 0}];
+
+var totalCoin = numbers.reduce(function(total,number){
+    return total + number.id;
 },0);
 
 console.log(totalCoin);
@@ -1659,7 +1696,7 @@ Array.prototype.myEvery = function (callback) {
   };
   var numbers = [2, 4, 6];
   var evens = numbers.myEvery(function (number) {
-    return number % 2 === 0;
+    return number % 3 === 0;
   });
   console.log('every fake', evens);
   console.log('every method real',
@@ -1755,7 +1792,7 @@ promise
 
     .then(function() {
         return new Promise(function(resolve){
-            setTimeout(function(){resolve([1,2,3]);}
+            setTimeout(function(){resolve([1,2,3])}
             ,5000);
         });
     })
@@ -1774,35 +1811,6 @@ promise
     })
 
 
-function sleep(ms){
-    return new Promise((resolve) => {
-        setTimeout(resolve,ms)
-    });
-}
-
-sleep(1000)
-    .then(()=>{
-        console.log(1);
-        return sleep(1000);
-    })
-
-    .then(function(){
-        console.log(2);
-        return sleep(1000);
-    })
-
-    .then(function(){
-        console.log(3);
-        return sleep(1000);
-    })
-
-    .then(function(){
-        console.log(4);
-        return sleep(1000);
-    });
-
-
-
 
 function delay(ms){
     return promise = new Promise(function(resolve){
@@ -1812,7 +1820,12 @@ function delay(ms){
 delay(3000)
     .then(function(){
         console.log('run after 3s');
-        return delay(3000)});
+        return delay(4000)})
+    .then(function(){
+        console.log('run after 6s');
+        return delay(2000)}); 
+        
+        
 
 
 function notHell(value) {
@@ -1822,7 +1835,7 @@ function notHell(value) {
 }
     
     
-notHell(1)
+notHell(1) // 1 chính là value
     .then(function (value) {
         return value + 1;
     })
@@ -1863,3 +1876,206 @@ notHell(1)
         //         console.log(4);
                 
         //     });
+        
+function sleep(ms){
+    return new Promise((resolve) => {
+        setTimeout(resolve,ms)
+    });
+}
+
+sleep(1000)
+    .then(()=>{
+        console.log(1);
+        return sleep(1000);
+    })
+//sẽ báo lỗi vì chưa có .catch
+    .then(function(){
+        console.log(2);
+        return new Promise(function(resolve,reject){
+            reject('lỗi rồi');
+        });
+    })
+
+    .then(function(){
+        console.log(3);
+        return sleep(1000);
+    })
+
+    .then(function(){
+        console.log(4);
+        return sleep(1000);
+    })
+    
+    .catch(function(err){
+        console.log(err)
+    })
+
+  
+
+// 1. Promise.resolve
+// 2. Promise.reject
+// 3. Promise.all
+
+
+// Thư viện: output luôn luôn là một promise
+
+// var promise = Promise.resolve('success');
+
+var promise = Promise.reject('error');
+// var promise = new Promise(
+//     function(resolve,reject){
+//         // resolve('Thành công')
+//         reject('Thất bại')
+//     }
+// )
+
+
+promise
+    .then(function(result){
+        console.log('result: ',result);
+    })
+        
+    .catch(function(err){
+        console.log('err: ', err);
+    })
+
+
+
+
+
+// promise1 và promise2 chạy cùng 1 thời điểm,tách biệt nhau
+
+var promise1 = new Promise(
+    function(resolve) {
+        setTimeout(function(){
+            resolve([1]);
+        },1000);
+    }
+);
+
+// var promise2 = new Promise(
+//     function(resolve) {
+//         setTimeout(function(){
+//             resolve([2,3]);
+//         },2000);
+//     }
+// );
+
+
+var promise2 =Promise.reject('Có lỗi!');
+
+
+
+Promise.all([promise1,promise2])
+    // .then(function(result){
+    //     var result1 = result[0];
+    //     var result2 = result[1];
+
+    //     console.log(result1.concat(result2));
+    // })
+ 
+    .then(function([result1,result2]){
+
+        console.log(result1.concat(result2));
+    })
+
+
+    .catch(function(err){
+        console.log(err);
+    })
+
+
+    
+    var users = [
+        {
+            id:1,
+            name:'Kien Dam'
+        },
+        {
+            id:2,
+            name:'Son Dang'
+        },
+        {
+            id:3,
+            name:'Hung Dam'
+        },
+    ]
+
+    var comments = [
+        {
+            id: 1,
+            user_id: 1,
+            content: 'Anh Son ra video chua anh oi'
+        },
+        {
+            id:2,
+            user_id:2,
+            content: 'Vừa ra xong em ơi!'
+        },
+        {
+            id:3,
+            user_id:1,
+            content: 'cam on anh!'
+        },
+    ]
+
+// 1. Lấy comments
+// 2. Từ comments lấy ra user_id(danh sách)
+// 3. Từ user_id lấy ra user tương ứng
+
+// Fake API
+
+function getComments() {
+    return new Promise(function(resolve){
+        setTimeout(function(){
+            resolve(comments);
+        },1000);
+    });
+}
+
+
+function getUsersByIds(userIds){
+    return new Promise(function(resolve){
+        var result = users.filter(function(user){
+            return userIds.includes(user.id);
+        });
+            setTimeout(function(){
+                resolve(result);
+            },1000);
+        
+    })
+}
+
+
+getComments()
+    .then(function(comments){
+        var userIds = comments.map(function(comment){
+            return comment.user_id;
+        });
+        
+        return getUsersByIds(userIds)
+            .then(function(users){
+                return {
+                    users: users,
+                    comments: comments,
+                };
+        });
+    })
+
+    .then(function(data){
+        var commentBlock = document.getElementById('comment-block');
+        var html ='';
+        data.comments.forEach(function(comment){
+            var user = data.users.find(function(user){
+                return user.id === comment.user_id;
+            });
+            html += `<li>${user.name}:${comment.content}</li>`
+        });
+        commentBlock.innerHTML = html;
+    });
+
+
+
+
+
+
