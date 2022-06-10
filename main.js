@@ -1997,7 +1997,7 @@ Promise.all([promise1,promise2])
         },
         {
             id:3,
-            name:'Hung Dam'
+            name:'Hung Hao'
         },
     ]
 
@@ -2033,18 +2033,23 @@ function getComments() {
     });
 }
 
+getComments().then(function(comments){console.log(comments)})
+
 
 function getUsersByIds(userIds){
     return new Promise(function(resolve){
         var result = users.filter(function(user){
             return userIds.includes(user.id);
         });
+        console.log(result)
             setTimeout(function(){
                 resolve(result);
             },1000);
         
     })
 }
+
+// getUsersByIds([1]).then(users => console.log(users))
 
 
 getComments()
@@ -2061,7 +2066,7 @@ getComments()
                 };
         });
     })
-
+    // .then(function(data){console.log(data)})
     .then(function(data){
         var commentBlock = document.getElementById('comment-block');
         var html ='';
