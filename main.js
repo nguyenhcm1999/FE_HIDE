@@ -2039,25 +2039,30 @@ getComments().then(function(comments){console.log(comments)})
 function getUsersByIds(userIds){
     return new Promise(function(resolve){
         var result = users.filter(function(user){
+            //lọc ra user nằm trong list userids thôi
             return userIds.includes(user.id);
         });
-        console.log(result)
+        // console.log(userIds) 
+        // kết quả 1 2 1
+        
+        
             setTimeout(function(){
                 resolve(result);
             },1000);
+            console.log(result)
         
     })
+    
 }
 
 // getUsersByIds([1]).then(users => console.log(users))
-
 
 getComments()
     .then(function(comments){
         var userIds = comments.map(function(comment){
             return comment.user_id;
         });
-        
+        // console.log(userIds) trả về 1 mảng [1,2,1]
         return getUsersByIds(userIds)
             .then(function(users){
                 return {
@@ -2078,7 +2083,6 @@ getComments()
         });
         commentBlock.innerHTML = html;
     });
-
 
 
 
