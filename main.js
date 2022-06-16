@@ -2039,7 +2039,7 @@ getComments().then(function(comments){console.log(comments)})
 function getUsersByIds(userIds){
     return new Promise(function(resolve){
         var result = users.filter(function(user){
-            //lọc ra user nằm trong list userids thôi
+            //lọc ra user nằm trong list userids thôi, tức là chỉ có id 1 và id 2
             return userIds.includes(user.id);
         });
         // console.log(userIds) 
@@ -2065,6 +2065,7 @@ getComments()
         // console.log(userIds) trả về 1 mảng [1,2,1]
         return getUsersByIds(userIds)
             .then(function(users){
+                //mình cần return ra cả comment và cả thông tin user
                 return {
                     users: users,
                     comments: comments,
@@ -2072,19 +2073,55 @@ getComments()
         });
     })
     // .then(function(data){console.log(data)})
+    // data chính là cái return object bao gồm users và comments
     .then(function(data){
         var commentBlock = document.getElementById('comment-block');
         var html ='';
         data.comments.forEach(function(comment){
             var user = data.users.find(function(user){
                 return user.id === comment.user_id;
+               
             });
+           
             html += `<li>${user.name}:${comment.content}</li>`
         });
         commentBlock.innerHTML = html;
     });
 
 
+// 1. Front-end: Xây dựng giao diện người dùng
+// 2. Back-end: Xây dựng logic xử lý + cơ sở dữ liệu
+// API (URL) lấy nội dung được lưu trữ trong phía BE -> application programing interface
+// API là cổng giao tiếp giữa các phần mềm
 
+// Backend -> API (backend cung cấp url) -> Fetch -> JSON/XML -> JSON.parse -> Javascript types
 
+// -> Render ra giao diện với HTML
 
+var PostApi = 
+    'https://jsonplaceholder.typicode.com/posts'
+
+// fetch cũng chính là promise
+// fetch trả lại 1 cái stream, luồng dữ liệu được trả về
+fetch(PostApi)
+    .then(function(response){
+        //response chính là đối tượng, và có phương thức là json
+        //return trả lại 1 promise
+        return response.json()
+        //json.parse: JSon -> Javascript types
+    })
+    .then(function(posts){
+        // console.log(posts);
+        var htmls = posts.map(function(post){
+            return `<li>
+            <h2>${post.title}</h2>
+            <h2>${post.body}</h2>
+            </li>`
+        })
+        
+        var html = htmls.join('');
+        document.getElementById('post-block').innerHTML = html
+    })
+    .catch(function(err){
+        console.log('nooooo');
+    })
