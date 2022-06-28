@@ -503,7 +503,7 @@ var courses = [
     {
         id:1,
         name:'JS',
-        coin:0
+        coin:100
     },
     {
         id:2,
@@ -584,7 +584,9 @@ function coinHandler(accumulator, currentValue, currentIndex, originArray){
          'Lượt chạy: ': i,
          'Biến tích trữ: ':accumulator,
          'Giá khóa học: ': currentValue.coin,
+        
          'Tích trữ được: ': total
+         //  'currentValue': currentValue,
 
      });
      return total;
@@ -703,10 +705,11 @@ Array.prototype.reduce2 = function(callback, result) {
     } return result;
 }
 
-var numbers = [1, 2, 3, 4];
-var result = numbers.reduce2((total, number) => {
+var numbers = [5, 2, 3, 4];
+var result = numbers.reduce2((total, number,index,array) => {
+    console.log(total,number,index,array)
     return total + number;
-})
+},1)
 
 console.log(result)
 
@@ -1465,32 +1468,35 @@ btn.addEventListener('click', function (){console.log('viec el2')});
 
 // Mã hóa / Giải mã
 // Encode / decode
-// Stringify: từ javascript types-> JSON
-// Parse: Từ JSON -> Javascript types
+// Stringify: từ javascript types-> JSON, chuyển Object thành String
+// Parse: Từ JSON -> Javascript types, chuyển String thành Object
 
 var Json = '["Javascript","PHP"]';  // cặp ngoặc '' ngoài cùng là chuỗi trong js
 // các key thể hiện kiểu dữ liệu dạng chuỗi dùng cặp nháy "", ngăn cách phần tử ,
-
-
+console.log(typeof JSON.parse(Json))
+console.log(typeof Json)
 var a = '1';
+console.log(typeof a)
 console.log(JSON.parse(a)); //JSON là kiểu number , còn type of null là 1 object
-
+console.log(typeof JSON.parse(a))
 // nếu muốn thể hiện dạng chuỗi ở json thì thêm dấu ""
 var b ='"abc"';
 console.log(typeof JSON.parse(b)); // là string
+console.log(typeof JSON.parse(b) === 'string' && b !== null )
 
 var json = '{"name":"Son Dang","age":18}';
+console.log(typeof JSON.parse(json))
 var object = JSON.parse(json);
 console.log(object);
 
-console.log(typeof JSON.parse(b) === 'string' && b !== null )
+
 
 
 // chuyển từ javscript sang json 
 // nếu muốn thêm 1 dấu nháy kép vào trong ' ' thì nó sẽ thêm \
 console.log(JSON.stringify([
     'Javas"cript',
-    'PHP'
+    "PHP"
 ]));
 
 // object thì nó sẽ dùng nháy kép cho cả key và cả value
@@ -2193,3 +2199,45 @@ fetch(PostApi)
 //     })
 //     listCoursesBlock.innerHTML = htmls.join('');
 // }
+
+
+// JSON-string dạng mảng
+var numbers = '[0, 1, 2, 3]';
+console.log(typeof numbers)
+// parse JSON-string về mảng
+numbers = JSON.parse(numbers);
+
+// sau khi numbers được parse thành array,
+// bạn có thể truy cập phần tử mảng qua chỉ số
+console.log(numbers[1]);
+console.log(numbers)
+console.log(typeof numbers)
+ var [a,b,c,d] = numbers
+console.log(a)
+
+var course = {
+    a: {},
+    chenvoobject :function(){
+        this.a['Key1'] = true
+},
+    // aaa: function(){Object.defineProperty(course,"fff",{value: "123"})},
+    defi: function(){
+        Object.defineProperty(course, "key2", {
+            configurable: false,
+            value: "2"
+        });
+    },
+    start(){
+        course.chenvoobject()
+        course.defi()
+    }
+}
+
+course.a['Key3'] = false
+Object.defineProperty(course, "Key4", {
+    configurable: false,
+    value: "4"
+});
+course.key0 = false
+course.start()
+console.log(course)
