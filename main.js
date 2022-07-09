@@ -1054,7 +1054,7 @@ console.log(document.forms[1]);
 
 var headingElement = 
  document.querySelector('h1');
-
+console.log(headingElement)
 // thêm attribute
 headingElement.title = 'Heading';   
 headingElement.className = 'Heading';
