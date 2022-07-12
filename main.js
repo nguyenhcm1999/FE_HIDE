@@ -699,11 +699,15 @@ Array.prototype.reduce2 = function(callback, result) {
     if(arguments.length < 2) {
         i = 1;
         result = this[0]
+        console.log(result)
     }
     for(; i <this.length; i++) {
+        console.log(result)
+        console.log(this[i])
         result = callback(result, this[i], i, this);
+        
     } return result;
-}
+}   
 
 var numbers = [5, 2, 3, 4];
 var result = numbers.reduce2((total, number,index,array) => {
@@ -2081,18 +2085,27 @@ getComments()
     // .then(function(data){console.log(data)})
     // data chính là cái return object bao gồm users và comments
     .then(function(data){
+        //data trả về users và comments
         var commentBlock = document.getElementById('comment-block');
-        var html ='';
+        var html =''
+        console.log(data.comments)
+        console.log(data.users)
         data.comments.forEach(function(comment){
             var user = data.users.find(function(user){
-                return user.id === comment.user_id;
-               
-            });
-           
+
+                console.log(user.id)
+                console.log(user.id === comment.user_id)
+                
+                return user.id === comment.user_id
+                
+            })
+            console.log(user)
             html += `<li>${user.name}:${comment.content}</li>`
-        });
+            
+        })
+        
         commentBlock.innerHTML = html;
-    });
+    })
 
 
 // 1. Front-end: Xây dựng giao diện người dùng
