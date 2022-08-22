@@ -2049,9 +2049,12 @@ getComments().then(function(comments){console.log(comments)})
 function getUsersByIds(userIds){
     return new Promise(function(resolve){
         var result = users.filter(function(user){
+            // console.log(userIds.includes(user.id)) true true false
+            // filter sẽ lọc true, loại bỏ user id : 3
             //lọc ra user nằm trong list userids thôi, tức là chỉ có id 1 và id 2
             return userIds.includes(user.id);
         });
+        
         // console.log(userIds) 
         // kết quả 1 2 1
         
