@@ -1559,8 +1559,6 @@ function test(callback, callback1, callbackObject){
     console.log(domainInfo);
 
 }
-
-
  
 // Gọi đến hàm và truyền hàm callback vào
 test(domainInfo.setName,domainInfo.setQuan,domainInfo);
@@ -2257,3 +2255,24 @@ Object.defineProperty(course, "Key4", {
 course.key0 = false
 course.start()
 console.log(course)
+
+function Car (name, color, weight) {
+    this.name = name
+    this.color = color
+    this.weight = weight
+    // this.run = function() {
+    //     console.log('Running ...', this)
+    // }
+ }
+
+ Car.prototype.play = function() {
+    function test() {
+        console.log(this)
+    }
+    test()
+ }
+
+ var mercedesS450 = new Car('Mercedes S450', 'Black', '1000kg')
+ 
+//   console.log(mercedesS450.run())
+  console.log(mercedesS450.play())
