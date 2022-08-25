@@ -1001,6 +1001,10 @@ console.log(score.sort( (firstEl, secondEl) =>
     secondEl -firstEl 
     
  ));
+ 
+//  Nếu compareFunction(a, b) trả về < 0 thì a sẽ đứng trước b.
+// Nếu compareFunction(a, b) trả về > 0 thì a sẽ đứng sau b.
+// Nếu compareFunction(a, b) trả về = 0 thì không sắp xếp (giữ nguyên thứ tự).
 
 function findLongestWord(str) {
     var longestWord = str.split(' ').sort(function(a, b) { return b.length - a.length; });
@@ -2265,6 +2269,7 @@ function Car (name, color, weight) {
     // }
  }
 
+ // Ví dụ về this trong function
  Car.prototype.play = function() {
     function test() {
         console.log(this)
