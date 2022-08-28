@@ -1717,7 +1717,8 @@ Array.prototype.myEvery = function (callback) {
     })
   );
 
-// promise
+// promise là một khái niệm sinh ra để xử lý thao tác bất đồng bộ
+// trước khi có promise thì dùng callback nhưng sẽ xảy ra callback hell
 // - sync là đồng bộ
 // - Async là bất đồng bộ : setTimeout, setInterval, fetch, xmlhttprequest,
 // file reading, request animation frame
@@ -1747,7 +1748,7 @@ console.log(domain);
 // setTimeout(function(){
 //     console.log(1); // viec 1
 //     setTimeout(function(){
-//         console.log(2); // viec 2
+//         console.log(2); // viec 2 
 //         setTimeout(function(){
 //             console.log(3); // viec 3
 //             setTimeout(function(){
@@ -1807,7 +1808,7 @@ promise
             setTimeout(function(){resolve([1,2,3])}
             ,5000);
         });
-    })
+    }) 
 
     .then(function(data){
         console.log(data)
@@ -2142,7 +2143,6 @@ fetch(PostApi)
             <h2>${post.body}</h2>
             </li>`
         })
-        
         var html = htmls.join('');
         document.getElementById('post-block').innerHTML = html
     })
